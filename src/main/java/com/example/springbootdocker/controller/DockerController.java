@@ -9,6 +9,6 @@ public class DockerController {
 
     @RequestMapping("/docker")
     public String docker(){
-        return "hello docker! 你好。。。。";
+        return "hello docker! 我是 master 分支。。。。";
     }
 }
