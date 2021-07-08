@@ -15,7 +15,6 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
-        <docker.image.prefix>mydocker</docker.image.prefix>
     </properties>
     <dependencies>
         <dependency>
@@ -35,27 +34,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <!-- 三坐标 -->
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <!-- 配置信息 -->
-                <configuration>
-                    <!-- 镜像名称 -->
-                    <imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
-                    <!-- Dockerfile 文件的位置 -->
-                    <dockerDirectory>src/main/docker</dockerDirectory>
-                    <!-- 文件资源 -->
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
             </plugin>
         </plugins>
     </build>
