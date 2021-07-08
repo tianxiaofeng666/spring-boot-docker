@@ -1,17 +1,21 @@
 pipeline {
-    agent {
-        node {
-            label 'maven'
-        }
-    }
+    agent any
 
     stages {
-        stage ('拉取代码') {
+        stage('Build') {
             steps {
-                checkout(scm)
-                echo "hello！success！"}
+                sh 'echo Build stage ...'
             }
         }
-
+        stage('Test') {
+            steps {
+                sh 'echo Test stage ...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo Deploy stage ...'
+            }
+        }
     }
 }
