@@ -26,7 +26,7 @@ pipeline {
         stage('发布') {
             steps {
                 sh """
-                    process_id=$(ps -ef | grep 'app.jar' | grep -v grep | awk '{print $2}')
+                    process_id=$(ps -ef | grep 'app.jar' | grep -v grep | awk '{print \$2}')
                     echo ${process_id}
                     if [ -z "${process_id}" ]; then
                         echo "服务未启动"
