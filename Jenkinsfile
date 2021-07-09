@@ -7,6 +7,7 @@ pipeline {
         TAG_NAME = 'spring-boot-dcoker'
         DOCKER_USERNAME = 'txf317512'
         DOCKER_PASSWORD = 'Txf317512'
+        PORT = 1111
     }
 
     stages {
@@ -24,7 +25,18 @@ pipeline {
         }
         stage('发布') {
             steps {
-                sh 'echo Deploy stage ...'
+                sh """
+                    process_id=$(ps -ef | grep 'app.jar' | grep -v grep | awk '{print $2}')
+                    echo $process_id
+                    if [ -z "$process_id" ]; then
+                        echo "服务未启动"
+                    else
+                        echo "停止正在进行服务"
+                        kill -9 $process_id
+                        echo "开始启动服务"
+                    fi
+                    docker run -d -p $PORT:$PORT $DOCKER_ID/$REPOSITORY_NAME:$TAG_NAME-$BUILD_NUMBER
+                """
             }
         }
     }
